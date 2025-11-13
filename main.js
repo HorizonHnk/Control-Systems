@@ -8,12 +8,12 @@ let filteredVideos = [];
 
 // Configuration
 const CONFIG = {
-    GEMINI_API_KEY: 'AIzaSyBflXaGZEruJEoYkSkS-ZjSA3BRzCuxrnE',
+    GEMINI_API_KEY: 'YOUR_GEMINI_API_KEY_HERE',
     // YOUTUBE_API_KEY removed - No longer needed! All videos data is hardcoded
     PLAYLIST_ID: 'PLrZbkNpNVSww_NDEWivJGMEekY40cUpJg',
     FORMSPREE_ID: 'xnnlqyja',
     FIREBASE_CONFIG: {
-        apiKey: "AIzaSyC9zH3D170r7ejc4b7teH9xq1cN0XTVids",
+        apiKey: "YOUR_FIREBASE_API_KEY_HERE",
         authDomain: "control-systems-34707.firebaseapp.com",
         projectId: "control-systems-34707",
         storageBucket: "control-systems-34707.appspot.com",
