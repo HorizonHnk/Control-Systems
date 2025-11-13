@@ -280,6 +280,90 @@ Each video entry in `videos-data.js` contains:
 }
 ```
 
+### 📺 Complete Video Library
+
+**YouTube Channel:** [@HNK2005](https://www.youtube.com/@HNK2005)
+**Complete Playlist:** [Control Systems Mastery - Engineering Made Simple](https://www.youtube.com/playlist?list=PLrZbkNpNVSww_NDEWivJGMEekY40cUpJg)
+
+<details>
+<summary><b>🎬 All 62 Video Tutorials (Click to expand)</b></summary>
+
+#### 🔵 Transfer Functions & Laplace Transforms
+1. [Solving for Vout with Unit Ramp Input and Transfer Function](https://www.youtube.com/watch?v=7MzlIX4JhXA)
+2. [Solving for Vout with Impulse Input and Transfer Function](https://www.youtube.com/watch?v=l_a7eL0lR4g)
+3. [Understanding Laplace Transform and Inverse Laplace Transform](https://www.youtube.com/watch?v=vjD8zOV_-3Y)
+4. [Applying Initial Conditions with Laplace Transform for Differential Equations](https://www.youtube.com/watch?v=clYQlPOFVjY)
+5. [Converting Time Domain to S-Domain in System Analysis | Step-by-Step Process](https://www.youtube.com/watch?v=_B7sd1SivcI)
+6. [Solving for Vout Using Partial Fractions and Inverse Laplace Transform](https://www.youtube.com/watch?v=EJWe4I0Sk-s)
+7. [Introduction to Partial Fractions and Decomposition Techniques](https://www.youtube.com/watch?v=lYQ0pGONFHg)
+8. [Solving for Vout with Unit Step Input and Transfer Function](https://www.youtube.com/watch?v=kdyLpeq3JTM)
+
+#### ⚡ RLC Circuits & Electrical Systems
+9. [Solving First-Order Differential Equation in R-L Circuit](https://www.youtube.com/watch?v=4vEjBgz8U-Q)
+10. [Electrical Circuit Analysis Basics | RLC Circuits & Impedance in Laplace Domain](https://www.youtube.com/watch?v=mQD0oiXmICY)
+11. [Solving for Current and Transfer Function in R-L-C Circuits | Loop Analysis](https://www.youtube.com/watch?v=d1Z7erRr7fw)
+12. [Solving for Current and Voltage in R-L-C Circuits | Loop Analysis and Kirchhoff's Law](https://www.youtube.com/watch?v=Bb8UDdNg1Hs)
+13. [Solving for Voltage and Current in Parallel R-L-C Circuits | Loop Analysis](https://www.youtube.com/watch?v=75BTLSiQsgQ)
+14. [Finding the Transfer Function in R-L Circuits | Step-by-Step Derivation](https://www.youtube.com/watch?v=xtK2RizbGyE)
+15. [Solving for Current in R-L Circuits | Using KVL and Laplace Transform](https://www.youtube.com/watch?v=90zEzk2fdWM)
+16. [Solving R-C Circuit with Initial Conditions | Time and S-Domain Analysis](https://www.youtube.com/watch?v=5sJVaKBNydY)
+17. [Solving Capacitor Loop Circuits | Voltage and Current Analysis with KVL & KCL](https://www.youtube.com/watch?v=hZxTKSzb52U)
+18. [Solving for Current in Parallel R-L-C Circuits | Using KVL and Laplace Transform](https://www.youtube.com/watch?v=oEMxeLKmmf0)
+19. [Deriving the Transfer Function in Parallel R-C Circuits | Step-by-Step Analysis](https://www.youtube.com/watch?v=hDY-rKN5Ct8)
+20. [Solving for Current in R-L Circuits | Using KVL and Laplace Transform](https://www.youtube.com/watch?v=RGOWDN-XH0k)
+21. [Finding the Transfer Function in R-L-C Circuits | Step-by-Step Derivation](https://www.youtube.com/watch?v=aYb3ZVrWL6Q)
+22. [Deriving the Transfer Function in R-L-C Circuits | Series and Parallel Impedances](https://www.youtube.com/watch?v=4nXSA5Paayw)
+23. [Solving for Voltage and Current in R-L-C Circuits | Using KVL and KCL](https://www.youtube.com/watch?v=lTsRpYPUKHo)
+24. [How to Solve Loop Circuit Problems | Voltage and Current Analysis](https://www.youtube.com/watch?v=whJs-BVk80k)
+25. [Solving for Vout in R-C Circuit with Unit Ramp Input](https://www.youtube.com/watch?v=TlFGCZrozaw)
+26. [Solving Loop Circuit Equations | Current Analysis and Laplace Transform](https://www.youtube.com/watch?v=ZZHcWSmLRWM)
+
+#### 🔧 Operational Amplifiers
+27. [Solving Complex Transfer Functions in Operational Amplifier Circuits | Step-by-Step Guide](https://www.youtube.com/watch?v=c2UKpabYqz8)
+28. [Solving Complex Transfer Functions in Multi-Stage Operational Amplifier Circuits](https://www.youtube.com/watch?v=V-eq821MQRM)
+29. [Understanding Operational Amplifiers (Op-Amps) | Amplifying Weak Signals](https://www.youtube.com/watch?v=cbDVX4NcOQE)
+30. [Understanding Amplifiers | How Amplifiers Work and Why They're Essential](https://www.youtube.com/watch?v=UwBjEnnZDZ8)
+31. [Differentiator Circuit with Operational Amplifiers | Transfer Function & Laplace Transform](https://www.youtube.com/watch?v=5yWY9nRFb5o)
+32. [Solving for the Integrator in Operational Amplifiers | Transfer Function Breakdown](https://www.youtube.com/watch?v=iMPjM_o0Vyc)
+33. [Transfer Function & V_out in Operational Amplifier Circuits | Parallel Resistor & Capacitor](https://www.youtube.com/watch?v=qljk-wHqIsE)
+
+#### ⚙️ Mechanical Systems
+34. [Force in Mechanical Systems | Derivation of the Equation with Mass, Stiffness, and Damping](https://www.youtube.com/watch?v=oNB41eBnuU8)
+35. [Single-Mass Mechanical System Analysis | Differential Equations & Force Calculation](https://www.youtube.com/watch?v=z9UiispugMU)
+36. [Solving Two-Mass Mechanical Systems | Force & Vibration Analysis](https://www.youtube.com/watch?v=oL_mtycI05c)
+37. [Solving Two-Mass Systems | Differential Equations & Force Analysis](https://www.youtube.com/watch?v=fesRRHazjm4)
+38. [Solving Two-Mass System Equations | Differential Equations & Vibration Analysis](https://www.youtube.com/watch?v=k9NDblRDEFY)
+39. [Solving Two-Mass Systems | Force Equations & Differential Equations](https://www.youtube.com/watch?v=6hIZnLzInRM)
+40. [Solving Two-Mass Mechanical Systems | Deriving Equations & S-Domain Conversion](https://www.youtube.com/watch?v=_q5QTGoloT0)
+41. [Solving for Force in Mechanical Systems | Equation Derivation and Analysis](https://www.youtube.com/watch?v=boGdI35rbPc)
+42. [Solving Two-Mass System Equations | Force, Vibration & Differential Equations](https://www.youtube.com/watch?v=vmE0-Oy4eno)
+43. [Solving for Force in Two-Mass Mechanical Systems | Differential Equations and Vibration Analysis](https://www.youtube.com/watch?v=F7qKkoeQ5SY)
+44. [Solving Two-Mass System Equations | Vibration Analysis & Differential Equations](https://www.youtube.com/watch?v=-b1OlE0ywTk)
+45. [Mechanical System Dynamics | Equations of Motion, Derivatives & S-Domain Conversion](https://www.youtube.com/watch?v=yb5o1FHUY7A)
+46. [Solving Two-Mass System Equations | S-Domain Conversion & Force Analysis](https://www.youtube.com/watch?v=1bZq3OM2Kk8)
+47. [Modeling Mechanical Systems: Mass, Damper, and Elastic Force with Laplace Transform](https://www.youtube.com/watch?v=2spOFm2orjk)
+48. [Solving for Force in Multi-Mass Mechanical Systems | Differential Equations & System Analysis](https://www.youtube.com/watch?v=hItBIPJhHEE)
+49. [Solving for Force in Mechanical Systems | Equation Derivation with Mass and Displacement](https://www.youtube.com/watch?v=7OnS7nY8oTI)
+50. [Solving for Force in Two-Mass Systems | Differential Equations and Vibration Analysis](https://www.youtube.com/watch?v=NXKaOd2KvIY)
+51. [Solving Two-Mass Mechanical Systems | Differential Equations & Force Analysis](https://www.youtube.com/watch?v=me7-icFgo_E)
+52. [Solving for Force in Single-Mass Mechanical Systems | Differential Equations & S-Domain Conversion](https://www.youtube.com/watch?v=IZKbQiUwwQ8)
+53. [Solving Two-Mass Mechanical System Equations | Differential Equations & Vibration Analysis](https://www.youtube.com/watch?v=WzkSK0rhJAU)
+54. [Solving for Force in Mass-Spring-Damper Systems | S-Domain Conversion & Analysis](https://www.youtube.com/watch?v=1466xlaY3W8)
+
+#### 📊 System Analysis & Control
+55. [Calculating Damping Ratio and Natural Frequency in Second-Order Systems](https://www.youtube.com/watch?v=hBJrJrKiD64)
+56. [Simplifying Blocks in Control Systems: Cascade, Parallel, and Feedback Connections](https://www.youtube.com/watch?v=IAB0MNLRNu8)
+57. [Introduction to Differential Equations and First-Order Systems](https://www.youtube.com/watch?v=WyHKabxCyZ8)
+58. [Understanding Basic Functions in Dynamic System Analysis](https://www.youtube.com/watch?v=UJyot6qxXwU)
+59. [🔍 Understanding Unit Step, Impulse, and Ramp Functions in Signal Processing 📈](https://www.youtube.com/watch?v=m3UssjhuCB0)
+60. [Solving Second-Order Differential Equation Using Laplace Transform with Initial Conditions](https://www.youtube.com/watch?v=PsO2vL5MGG8)
+61. [Understanding System Response: First and Second Order Systems and Damping Ratio](https://www.youtube.com/watch?v=_2a-w8-olJU)
+
+#### 🎯 Root Locus (NEW!)
+62. [Finding the Root Locus of a Control System Step-by-Step | Poles, Zeros & Asymptotes Explained](https://www.youtube.com/watch?v=Yd0hKzuzvss) ⭐ **Latest Video!**
+
+</details>
+
 ---
 
 ## 🌐 Deployment
