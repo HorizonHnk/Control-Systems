@@ -1,0 +1,1240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resources - Control Systems Mastery</title>
+    <meta name="description" content="Free downloadable resources for Control Systems Engineering. Formula sheets, Laplace tables, MATLAB code, practice problems, and more.">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Custom Styles -->
+    <style>
+        :root {
+            --primary-blue: #1E3A8A;
+            --electric-blue: #3B82F6;
+            --cyan-accent: #06B6D4;
+            --dark-bg: #0F172A;
+            --light-bg: #F8FAFC;
+            --dark-text: #1E293B;
+            --gray-text: #64748B;
+            --success-green: #10B981;
+            --warning-orange: #F59E0B;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--light-bg);
+            color: var(--dark-text);
+            overflow-x: hidden;
+        }
+        
+        .text-gradient {
+            background: linear-gradient(135deg, var(--electric-blue), var(--cyan-accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .glass-effect {
+            background: rgba(30, 58, 138, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+        }
+        
+        .resource-card {
+            transition: all 0.3s ease;
+            border: 1px solid #E2E8F0;
+            background: white;
+        }
+        
+        .resource-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--cyan-accent);
+            box-shadow: 0 20px 40px rgba(59, 130, 246, 0.1);
+        }
+        
+        .nav-link {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            color: var(--cyan-accent);
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--cyan-accent);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .mobile-menu {
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .mobile-menu.active {
+            transform: translateX(0);
+        }
+        
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+        
+        .scroll-reveal.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .calculator-container {
+            background: rgba(30, 58, 138, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            border-radius: 1rem;
+            padding: 1.5rem;
+        }
+        
+        .calculator-input {
+            background: white;
+            border: 1px solid #E2E8F0;
+            border-radius: 0.5rem;
+            padding: 0.75rem;
+            color: #1E293B;
+            width: 100%;
+            margin-bottom: 1rem;
+        }
+        
+        .calculator-input:focus {
+            outline: none;
+            border-color: var(--cyan-accent);
+            box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.1);
+        }
+
+        .calculator-input::placeholder {
+            color: #94A3B8;
+        }
+        
+        .calculator-button {
+            background: linear-gradient(135deg, var(--electric-blue), var(--cyan-accent));
+            border: none;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+        
+        .calculator-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(59, 130, 246, 0.3);
+        }
+        
+        .calculator-result {
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin-top: 1rem;
+            color: #10B981;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        
+        .resource-category {
+            margin-bottom: 3rem;
+        }
+        
+        .category-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .category-icon {
+            width: 3rem;
+            height: 3rem;
+            border-radius: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+        }
+        
+        .download-btn {
+            background: linear-gradient(135deg, var(--success-green), #059669);
+            border: none;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.875rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .download-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 5px 15px rgba(16, 185, 129, 0.3);
+        }
+        
+        .formula-display {
+            background: #F0F9FF;
+            border: 1px solid #BFDBFE;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            color: #1E293B;
+            margin: 1rem 0;
+            font-family: 'JetBrains Mono', monospace;
+            text-align: center;
+            border-left: 4px solid var(--cyan-accent);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-white shadow-sm border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <a href="index.html" class="flex items-center space-x-3 hover:opacity-80 transition-opacity">
+                    <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-cyan-400 rounded-lg flex items-center justify-center">
+                        <i class="fas fa-microchip text-white text-lg"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-xl font-bold text-gradient">Control Systems</h1>
+                        <p class="text-xs text-gray-500">Mastery</p>
+                    </div>
+                </a>
+                
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="nav-link text-gray-700 font-medium">Home</a>
+                    <a href="videos.html" class="nav-link text-gray-700 font-medium">Videos</a>
+                    <a href="ai-assistant.html" class="nav-link text-gray-700 font-medium">AI Assistant</a>
+                    <a href="resources.html" class="nav-link text-cyan-400 font-medium">Resources</a>
+                    <a href="about.html" class="nav-link text-gray-900 font-medium">About</a>
+                    <a href="contact.html" class="nav-link text-gray-900 font-medium">Contact</a>
+                </div>
+                
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="md:hidden text-white">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="mobile-menu md:hidden fixed top-16 right-0 w-64 h-screen glass-effect">
+            <div class="p-6 space-y-4">
+                <a href="index.html" class="block text-gray-700 font-medium py-2">Home</a>
+                <a href="videos.html" class="block text-gray-700 font-medium py-2">Videos</a>
+                <a href="ai-assistant.html" class="block text-gray-700 font-medium py-2">AI Assistant</a>
+                <a href="resources.html" class="block text-cyan-400 font-medium py-2">Resources</a>
+                <a href="about.html" class="block text-gray-700 font-medium py-2">About</a>
+                <a href="contact.html" class="block text-gray-700 font-medium py-2">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header Section -->
+    <section class="pt-24 pb-12 bg-gradient-to-br from-blue-50 via-cyan-50 to-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 scroll-reveal">
+                <h1 class="text-4xl md:text-6xl font-black mb-6 text-gray-900">
+                    Learning <span class="text-gradient">Resources</span>
+                </h1>
+                <p class="text-xl text-gray-700 max-w-3xl mx-auto">
+                    Free downloadable resources, interactive tools, and comprehensive study materials for Control Systems Engineering.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Tools Section -->
+    <section class="py-16 bg-blue-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 scroll-reveal">
+                <h2 class="text-3xl md:text-4xl font-bold mb-6 text-gray-900">
+                    Interactive <span class="text-gradient">Calculators</span>
+                </h2>
+                <p class="text-xl text-gray-700 max-w-3xl mx-auto">
+                    Use these tools to solve common control systems problems and verify your calculations.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Laplace Transform Calculator -->
+                <div class="calculator-container scroll-reveal">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">
+                        <i class="fas fa-calculator text-cyan-400 mr-2"></i>
+                        Laplace Transform Calculator
+                    </h3>
+                    <p class="text-gray-700 mb-4">Calculate Laplace transforms of common time-domain functions.</p>
+                    
+                    <div class="formula-display">
+                        L{f(t)} = ∫₀^∞ f(t)e^(-st) dt
+                    </div>
+                    
+                    <select id="laplace-function" class="calculator-input">
+                        <option value="">Select a function...</option>
+                        <option value="1">Unit Step: u(t)</option>
+                        <option value="t">Ramp: t</option>
+                        <option value="t^2">Parabolic: t²</option>
+                        <option value="e^at">Exponential: e^(at)</option>
+                        <option value="sin(wt)">Sine: sin(ωt)</option>
+                        <option value="cos(wt)">Cosine: cos(ωt)</option>
+                    </select>
+                    
+                    <input type="text" id="laplace-custom" class="calculator-input" placeholder="Or enter custom function f(t):">
+                    
+                    <button onclick="calculateLaplace()" class="calculator-button">
+                        <i class="fas fa-calculator mr-2"></i>
+                        Calculate Transform
+                    </button>
+                    
+                    <div id="laplace-result" class="calculator-result hidden"></div>
+                </div>
+                
+                <!-- Transfer Function Analyzer -->
+                <div class="calculator-container scroll-reveal">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">
+                        <i class="fas fa-exchange-alt text-cyan-400 mr-2"></i>
+                        Transfer Function Analyzer
+                    </h3>
+                    <p class="text-gray-700 mb-4">Analyze system characteristics from transfer functions.</p>
+                    
+                    <div class="formula-display">
+                        G(s) = Y(s)/X(s) = (b₀sⁿ + b₁sⁿ⁻¹ + ... + bₙ)/(a₀sᵐ + a₁sᵐ⁻¹ + ... + aₘ)
+                    </div>
+                    
+                    <input type="text" id="tf-numerator" class="calculator-input" placeholder="Numerator coefficients (e.g., [1, 2] for s + 2):">
+                    
+                    <input type="text" id="tf-denominator" class="calculator-input" placeholder="Denominator coefficients (e.g., [1, 3, 2] for s² + 3s + 2):">
+                    
+                    <button onclick="analyzeTransferFunction()" class="calculator-button">
+                        <i class="fas fa-chart-line mr-2"></i>
+                        Analyze System
+                    </button>
+                    
+                    <div id="tf-result" class="calculator-result hidden"></div>
+                </div>
+                
+                <!-- PID Tuner -->
+                <div class="calculator-container scroll-reveal">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">
+                        <i class="fas fa-cogs text-cyan-400 mr-2"></i>
+                        PID Controller Tuner
+                    </h3>
+                    <p class="text-gray-700 mb-4">Calculate PID controller parameters using different tuning methods.</p>
+                    
+                    <div class="formula-display">
+                        G_PID(s) = Kp + Ki/s + Kd·s
+                    </div>
+                    
+                    <select id="pid-method" class="calculator-input">
+                        <option value="ziegler-nichols">Ziegler-Nichols Method</option>
+                        <option value="cohen-coon">Cohen-Coon Method</option>
+                        <option value="trial-error">Trial and Error</option>
+                    </select>
+                    
+                    <input type="number" id="pid-k" class="calculator-input" placeholder="Process Gain (K):">
+                    <input type="number" id="pid-tau" class="calculator-input" placeholder="Time Constant (τ):">
+                    <input type="number" id="pid-theta" class="calculator-input" placeholder="Dead Time (θ):">
+                    
+                    <button onclick="tunePID()" class="calculator-button">
+                        <i class="fas fa-sliders-h mr-2"></i>
+                        Calculate Parameters
+                    </button>
+                    
+                    <div id="pid-result" class="calculator-result hidden"></div>
+                </div>
+                
+                <!-- System Response Calculator -->
+                <div class="calculator-container scroll-reveal">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">
+                        <i class="fas fa-wave-square text-cyan-400 mr-2"></i>
+                        System Response Calculator
+                    </h3>
+                    <p class="text-gray-700 mb-4">Calculate step, impulse, and ramp responses for first and second-order systems.</p>
+                    
+                    <div class="formula-display">
+                        Second-Order: G(s) = ωₙ²/(s² + 2ζωₙs + ωₙ²)
+                    </div>
+                    
+                    <select id="response-type" class="calculator-input">
+                        <option value="step">Step Response</option>
+                        <option value="impulse">Impulse Response</option>
+                        <option value="ramp">Ramp Response</option>
+                    </select>
+                    
+                    <input type="number" id="natural-frequency" class="calculator-input" placeholder="Natural Frequency (ωₙ):">
+                    <input type="number" id="damping-ratio" class="calculator-input" placeholder="Damping Ratio (ζ):">
+                    <input type="number" id="time-value" class="calculator-input" placeholder="Time value (t):">
+                    
+                    <button onclick="calculateResponse()" class="calculator-button">
+                        <i class="fas fa-chart-area mr-2"></i>
+                        Calculate Response
+                    </button>
+                    
+                    <div id="response-result" class="calculator-result hidden"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Downloadable Resources -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 scroll-reveal">
+                <h2 class="text-3xl md:text-4xl font-bold mb-6 text-gray-900">
+                    Downloadable <span class="text-gradient">Materials</span>
+                </h2>
+                <p class="text-xl text-gray-700 max-w-3xl mx-auto">
+                    Free PDF resources, formula sheets, and study guides for Control Systems Engineering.
+                </p>
+            </div>
+            
+            <!-- Formula Sheets -->
+            <div class="resource-category scroll-reveal">
+                <div class="category-header">
+                    <div class="category-icon bg-gradient-to-br from-blue-500 to-cyan-400 text-white">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold text-gray-900">Formula Sheets & Tables</h3>
+                        <p class="text-gray-700">Quick reference guides for exams and homework</p>
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="resource-card rounded-xl p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-400 rounded-lg flex items-center justify-center">
+                                <i class="fas fa-square-root-alt text-white text-xl"></i>
+                            </div>
+                            <button onclick="downloadResource('laplace-table')" class="download-btn">
+                                <i class="fas fa-download"></i>
+                                PDF
+                            </button>
+                        </div>
+                        <h4 class="text-lg font-bold text-gray-900 mb-2">Laplace Transform Table</h4>
+                        <p class="text-gray-700 text-sm mb-3">Complete table of Laplace transforms and their inverses for common functions.</p>
+                        <div class="text-xs text-gray-500">
+                            <i class="fas fa-clock mr-1"></i>
+                            Updated: March 2025
+                        </div>
+                    </div>
+                    
+                    <div class="resource-card rounded-xl p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-400 rounded-lg flex items-center justify-center">
+                                <i class="fas fa-exchange-alt text-white text-xl"></i>
+                            </div>
+                            <button onclick="downloadResource('transfer-functions')" class="download-btn">
+                                <i class="fas fa-download"></i>
+                                PDF
+                            </button>
+                        </div>
+                        <h4 class="text-lg font-bold text-gray-900 mb-2">Transfer Function Formulas</h4>
+                        <p class="text-gray-700 text-sm mb-3">Essential formulas for deriving and analyzing transfer functions in control systems.</p>
+                        <div class="text-xs text-gray-500">
+                            <i class="fas fa-clock mr-1"></i>
+                            Updated: March 2025
+                        </div>
+                    </div>
+                    
+                    <div class="resource-card rounded-xl p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="w-12 h-12 bg-gradient-to-br from-orange-500 to-red-400 rounded-lg flex items-center justify-center">
+                                <i class="fas fa-calculator text-white text-xl"></i>
+                            </div>
+                            <button onclick="downloadResource('pid-formulas')" class="download-btn">
+                                <i class="fas fa-download"></i>
+                                PDF
+                            </button>
+                        </div>
+                        <h4 class="text-lg font-bold text-gray-900 mb-2">PID Controller Design</h4>
+                        <p class="text-gray-700 text-sm mb-3">Tuning methods, formulas, and design guidelines for PID controllers.</p>
+                        <div class="text-xs text-gray-500">
+                            <i class="fas fa-clock mr-1"></i>
+                            Updated: March 2025
+                        </div>
+                    </div>
+                    
+                    <div class="resource-card rounded-xl p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="w-12 h-12 bg-gradient-to-br from-indigo-500 to-blue-400 rounded-lg flex items-center justify-center">
+                                <i class="fas fa-wave-square text-white text-xl"></i>
+                            </div>
+                            <button onclick="downloadResource('frequency-response')" class="download-btn">
+                                <i class="fas fa-download"></i>
+                                PDF
+                            </button>
+                        </div>
+                        <h4 class="text-lg font-bold text-gray-900 mb-2">Frequency Response Analysis</h4>
+                        <p class="text-gray-700 text-sm mb-3">Bode plot construction, stability margins, and frequency domain analysis.</p>
+                        <div class="text-xs text-gray-500">
+                            <i class="fas fa-clock mr-1"></i>
+                            Updated: March 2025
+                        </div>
+                    </div>
+                    
+                    <div class="resource-card rounded-xl p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="w-12 h-12 bg-gradient-to-br from-teal-500 to-green-400 rounded-lg flex items-center justify-center">
+                                <i class="fas fa-bolt text-white text-xl"></i>
+                            </div>
+                            <button onclick="downloadResource('rlc-circuits')" class="download-btn">
+                                <i class="fas fa-download"></i>
+                                PDF
+                            </button>
+                        </div>
+                        <h4 class="text-lg font-bold text-gray-900 mb-2">RLC Circuit Analysis</h4>
+                        <p class="text-gray-700 text-sm mb-3">Transfer functions, impedance calculations, and circuit analysis for RLC networks.</p>
+                        <div class="text-xs text-gray-500">
+                            <i class="fas fa-clock mr-1"></i>
+                            Updated: March 2025
+                        </div>
+                    </div>
+                    
+                    <div class="resource-card rounded-xl p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="w-12 h-12 bg-gradient-to-br from-pink-500 to-rose-400 rounded-lg flex items-center justify-center">
+                                <i class="fas fa-balance-scale text-white text-xl"></i>
+                            </div>
+                            <button onclick="downloadResource('stability-criteria')" class="download-btn">
+                                <i class="fas fa-download"></i>
+                                PDF
+                            </button>
+                        </div>
+                        <h4 class="text-lg font-bold text-gray-900 mb-2">Stability Criteria</h4>
+                        <p class="text-gray-700 text-sm mb-3">Routh-Hurwitz criterion, Nyquist criterion, and root locus analysis methods.</p>
+                        <div class="text-xs text-gray-500">
+                            <i class="fas fa-clock mr-1"></i>
+                            Updated: March 2025
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- MATLAB Code Examples -->
+            <div class="resource-category scroll-reveal">
+                <div class="category-header">
+                    <div class="category-icon bg-gradient-to-br from-purple-500 to-pink-400 text-white">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold text-gray-900">MATLAB Code Examples</h3>
+                        <p class="text-gray-700">Ready-to-use MATLAB scripts for control systems analysis</p>
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="resource-card rounded-xl p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-cyan-400 rounded-lg flex items-center justify-center">
+                                <i class="fas fa-code text-white text-xl"></i>
+                            </div>
+                            <button onclick="downloadResource('matlab-basics')" class="download-btn">
+                                <i class="fas fa-download"></i>
+                                ZIP
+                            </button>
+                        </div>
+                        <h4 class="text-lg font-bold text-gray-900 mb-2">Control Systems Basics</h4>
+                        <p class="text-gray-700 text-sm mb-3">Fundamental MATLAB functions for creating and analyzing transfer functions.</p>
+                        <div class="text-xs text-gray-500">
+                            <i class="fas fa-code mr-1"></i>
+                            15 MATLAB functions
+                        </div>
+                    </div>
+                    
+                    <div class="resource-card rounded-xl p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-400 rounded-lg flex items-center justify-center">
+                                <i class="fas fa-chart-line text-white text-xl"></i>
+                            </div>
+                            <button onclick="downloadResource('matlab-plots')" class="download-btn">
+                                <i class="fas fa-download"></i>
+                                ZIP
+                            </button>
+                        </div>
+                        <h4 class="text-lg font-bold text-gray-900 mb-2">Plotting & Visualization</h4>
+                        <p class="text-gray-700 text-sm mb-3">Scripts for creating step responses, Bode plots, and root locus diagrams.</p>
+                        <div class="text-xs text-gray-500">
+                            <i class="fas fa-chart-area mr-1"></i>
+                            12 plotting examples
+                        </div>
+                    </div>
+                    
+                    <div class="resource-card rounded-xl p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="w-12 h-12 bg-gradient-to-br from-orange-500 to-red-400 rounded-lg flex items-center justify-center">
+                                <i class="fas fa-cogs text-white text-xl"></i>
+                            </div>
+                            <button onclick="downloadResource('matlab-pid')" class="download-btn">
+                                <i class="fas fa-download"></i>
+                                ZIP
+                            </button>
+                        </div>
+                        <h4 class="text-lg font-bold text-gray-900 mb-2">PID Controller Design</h4>
+                        <p class="text-gray-700 text-sm mb-3">Complete PID controller implementation with tuning and simulation examples.</p>
+                        <div class="text-xs text-gray-500">
+                            <i class="fas fa-sliders-h mr-1"></i>
+                            8 PID examples
+                        </div>
+                    </div>
+                    
+                    <div class="resource-card rounded-xl p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="w-12 h-12 bg-gradient-to-br from-indigo-500 to-blue-400 rounded-lg flex items-center justify-center">
+                                <i class="fas fa-wave-square text-white text-xl"></i>
+                            </div>
+                            <button onclick="downloadResource('matlab-frequency')" class="download-btn">
+                                <i class="fas fa-download"></i>
+                                ZIP
+                            </button>
+                        </div>
+                        <h4 class="text-lg font-bold text-gray-900 mb-2">Frequency Response</h4>
+                        <p class="text-gray-700 text-sm mb-3">Bode plot generation, Nyquist plots, and frequency domain analysis.</p>
+                        <div class="text-xs text-gray-500">
+                            <i class="fas fa-signal mr-1"></i>
+                            10 frequency examples
+                        </div>
+                    </div>
+                    
+                    <div class="resource-card rounded-xl p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="w-12 h-12 bg-gradient-to-br from-teal-500 to-green-400 rounded-lg flex items-center justify-center">
+                                <i class="fas fa-project-diagram text-white text-xl"></i>
+                            </div>
+                            <button onclick="downloadResource('matlab-state-space')" class="download-btn">
+                                <i class="fas fa-download"></i>
+                                ZIP
+                            </button>
+                        </div>
+                        <h4 class="text-lg font-bold text-gray-900 mb-2">State-Space Analysis</h4>
+                        <p class="text-gray-700 text-sm mb-3">Modern control theory implementation with state-space methods.</p>
+                        <div class="text-xs text-gray-500">
+                            <i class="fas fa-cube mr-1"></i>
+                            6 state-space examples
+                        </div>
+                    </div>
+                    
+                    <div class="resource-card rounded-xl p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="w-12 h-12 bg-gradient-to-br from-pink-500 to-rose-400 rounded-lg flex items-center justify-center">
+                                <i class="fas fa-flask text-white text-xl"></i>
+                            </div>
+                            <button onclick="downloadResource('matlab-simulations')" class="download-btn">
+                                <i class="fas fa-download"></i>
+                                ZIP
+                            </button>
+                        </div>
+                        <h4 class="text-lg font-bold text-gray-900 mb-2">Advanced Simulations</h4>
+                        <p class="text-gray-700 text-sm mb-3">Complex system simulations and real-world application examples.</p>
+                        <div class="text-xs text-gray-500">
+                            <i class="fas fa-flask mr-1"></i>
+                            20 simulation models
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Practice Problems -->
+            <div class="resource-category scroll-reveal">
+                <div class="category-header">
+                    <div class="category-icon bg-gradient-to-br from-orange-500 to-red-400 text-white">
+                        <i class="fas fa-tasks"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold text-gray-900">Practice Problems & Solutions</h3>
+                        <p class="text-gray-700">Graded problem sets with detailed solutions</p>
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="resource-card rounded-xl p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-400 rounded-lg flex items-center justify-center">
+                                <span class="text-white font-bold text-lg">1</span>
+                            </div>
+                            <button onclick="downloadResource('problems-beginner')" class="download-btn">
+                                <i class="fas fa-download"></i>
+                                PDF
+                            </button>
+                        </div>
+                        <h4 class="text-lg font-bold text-gray-900 mb-2">Beginner Level</h4>
+                        <p class="text-gray-700 text-sm mb-3">Basic transfer functions, Laplace transforms, and first-order systems.</p>
+                        <div class="flex justify-between text-xs text-gray-500">
+                            <span>25 problems</span>
+                            <span>With solutions</span>
+                        </div>
+                    </div>
+                    
+                    <div class="resource-card rounded-xl p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="w-12 h-12 bg-gradient-to-br from-yellow-500 to-orange-400 rounded-lg flex items-center justify-center">
+                                <span class="text-white font-bold text-lg">2</span>
+                            </div>
+                            <button onclick="downloadResource('problems-intermediate')" class="download-btn">
+                                <i class="fas fa-download"></i>
+                                PDF
+                            </button>
+                        </div>
+                        <h4 class="text-lg font-bold text-gray-900 mb-2">Intermediate Level</h4>
+                        <p class="text-gray-700 text-sm mb-3">Second-order systems, stability analysis, and frequency response.</p>
+                        <div class="flex justify-between text-xs text-gray-500">
+                            <span>30 problems</span>
+                            <span>With solutions</span>
+                        </div>
+                    </div>
+                    
+                    <div class="resource-card rounded-xl p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="w-12 h-12 bg-gradient-to-br from-red-500 to-pink-400 rounded-lg flex items-center justify-center">
+                                <span class="text-white font-bold text-lg">3</span>
+                            </div>
+                            <button onclick="downloadResource('problems-advanced')" class="download-btn">
+                                <i class="fas fa-download"></i>
+                                PDF
+                            </button>
+                        </div>
+                        <h4 class="text-lg font-bold text-gray-900 mb-2">Advanced Level</h4>
+                        <p class="text-gray-700 text-sm mb-3">PID design, state-space analysis, and complex system modeling.</p>
+                        <div class="flex justify-between text-xs text-gray-500">
+                            <span>20 problems</span>
+                            <span>With solutions</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-100 py-12 border-t border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="col-span-1 md:col-span-2">
+                    <div class="flex items-center space-x-3 mb-6">
+                        <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-cyan-400 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-microchip text-white text-lg"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-gradient">Control Systems Mastery</h3>
+                            <p class="text-sm text-gray-700">Engineering Made Simple</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 mb-6 leading-relaxed">
+                        Empowering engineering students worldwide with free, comprehensive control systems education through expert video tutorials and AI-powered assistance.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="https://www.youtube.com/@HNK2005" target="_blank" class="text-gray-700 hover:text-white transition-colors">
+                            <i class="fab fa-youtube text-xl"></i>
+                        </a>
+                        <a href="https://discord.gg/hnk0422_76455" target="_blank" class="text-gray-700 hover:text-white transition-colors">
+                            <i class="fab fa-discord text-xl"></i>
+                        </a>
+                        <a href="https://twitter.com/HnkHorizon" target="_blank" class="text-gray-700 hover:text-white transition-colors">
+                            <i class="fab fa-twitter text-xl"></i>
+                        </a>
+                        <a href="https://tiktok.com/@codingfever" target="_blank" class="text-gray-700 hover:text-white transition-colors">
+                            <i class="fab fa-tiktok text-xl"></i>
+                        </a>
+                        <a href="https://instagram.com/hhnk.3693" target="_blank" class="text-gray-700 hover:text-white transition-colors">
+                            <i class="fab fa-instagram text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold text-gray-900 mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="videos.html" class="text-gray-700 hover:text-blue-600 transition-colors">Video Library</a></li>
+                        <li><a href="ai-assistant.html" class="text-gray-700 hover:text-blue-600 transition-colors">AI Assistant</a></li>
+                        <li><a href="resources.html" class="text-gray-700 hover:text-blue-600 transition-colors">Resources</a></li>
+                        <li><a href="about.html" class="text-gray-700 hover:text-blue-600 transition-colors">About</a></li>
+                        <li><a href="contact.html" class="text-gray-700 hover:text-blue-600 transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-lg font-semibold text-gray-900 mb-4">Topics</h4>
+                    <ul class="space-y-2">
+                        <li><a href="videos.html?topic=laplace" class="text-gray-700 hover:text-blue-600 transition-colors">Laplace Transforms</a></li>
+                        <li><a href="videos.html?topic=transfer" class="text-gray-700 hover:text-blue-600 transition-colors">Transfer Functions</a></li>
+                        <li><a href="videos.html?topic=pid" class="text-gray-700 hover:text-blue-600 transition-colors">PID Controllers</a></li>
+                        <li><a href="videos.html?topic=stability" class="text-gray-700 hover:text-blue-600 transition-colors">Stability Analysis</a></li>
+                        <li><a href="videos.html?topic=circuits" class="text-gray-700 hover:text-blue-600 transition-colors">RLC Circuits</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-200 mt-12 pt-8 text-center">
+                <p class="text-gray-700">
+                    © 2025 Control Systems Mastery. Built with ❤️ for engineering education.
+                    <a href="https://github.com/HorizonHnk/Control-Systems" target="_blank" class="text-cyan-400 hover:text-cyan-600 transition-colors">
+                        View on GitHub
+                    </a>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+        });
+        
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!mobileMenu.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+                mobileMenu.classList.remove('active');
+            }
+        });
+
+        // Calculator Functions
+        function calculateLaplace() {
+            const functionSelect = document.getElementById('laplace-function').value;
+            const customFunction = document.getElementById('laplace-custom').value;
+            const resultDiv = document.getElementById('laplace-result');
+            
+            let result = '';
+            
+            if (customFunction) {
+                result = `L{${customFunction}} = [Requires symbolic computation]`;
+            } else if (functionSelect) {
+                const transforms = {
+                    '1': 'L{1} = 1/s',
+                    't': 'L{t} = 1/s²',
+                    't^2': 'L{t²} = 2/s³',
+                    'e^at': 'L{e^(at)} = 1/(s-a)',
+                    'sin(wt)': 'L{sin(ωt)} = ω/(s²+ω²)',
+                    'cos(wt)': 'L{cos(ωt)} = s/(s²+ω²)'
+                };
+                result = transforms[functionSelect] || 'Please select a function';
+            } else {
+                result = 'Please select a function or enter a custom function';
+            }
+            
+            resultDiv.textContent = result;
+            resultDiv.classList.remove('hidden');
+        }
+
+        function analyzeTransferFunction() {
+            const numerator = document.getElementById('tf-numerator').value;
+            const denominator = document.getElementById('tf-denominator').value;
+            const resultDiv = document.getElementById('tf-result');
+            
+            if (!numerator || !denominator) {
+                resultDiv.textContent = 'Please enter both numerator and denominator coefficients';
+                resultDiv.classList.remove('hidden');
+                return;
+            }
+            
+            try {
+                // Simple analysis - in a real implementation, this would use a proper control systems library
+                const num = JSON.parse(numerator);
+                const den = JSON.parse(denominator);
+                
+                const result = `Transfer Function Analysis:
+                
+Numerator: [${num.join(', ')}]
+Denominator: [${den.join(', ')}]
+
+System Type: ${den.length - 1}nd order system
+DC Gain: ${num[num.length - 1] / den[den.length - 1]}
+
+Note: For detailed analysis including poles, zeros, and stability, use MATLAB or Python control systems libraries.`;
+                
+                resultDiv.textContent = result;
+                resultDiv.classList.remove('hidden');
+            } catch (error) {
+                resultDiv.textContent = 'Invalid input format. Please use array format like [1, 2, 1]';
+                resultDiv.classList.remove('hidden');
+            }
+        }
+
+        function tunePID() {
+            const method = document.getElementById('pid-method').value;
+            const k = parseFloat(document.getElementById('pid-k').value);
+            const tau = parseFloat(document.getElementById('pid-tau').value);
+            const theta = parseFloat(document.getElementById('pid-theta').value);
+            const resultDiv = document.getElementById('pid-result');
+            
+            if (!k || !tau || !theta) {
+                resultDiv.textContent = 'Please enter all process parameters';
+                resultDiv.classList.remove('hidden');
+                return;
+            }
+            
+            let kp, ki, kd;
+            
+            switch (method) {
+                case 'ziegler-nichols':
+                    kp = 1.2 * tau / (k * theta);
+                    ki = kp / (2 * theta);
+                    kd = kp * theta / 2;
+                    break;
+                case 'cohen-coon':
+                    const r = theta / tau;
+                    kp = (1/k) * (tau/theta) * (4/3 + r/4);
+                    ki = kp / (tau * (32 + 6*r)/(13 + 8*r));
+                    kd = kp * theta * (4/(11 + 2*r));
+                    break;
+                default:
+                    resultDiv.textContent = 'Tuning method not implemented';
+                    resultDiv.classList.remove('hidden');
+                    return;
+            }
+            
+            const result = `PID Controller Tuning (${method}):
+            
+Process Parameters:
+K = ${k}, τ = ${tau}, θ = ${theta}
+
+PID Parameters:
+Kp = ${kp.toFixed(4)}
+Ki = ${ki.toFixed(4)}
+Kd = ${kd.toFixed(4)}
+
+Controller: Gc(s) = ${kp.toFixed(4)} + ${ki.toFixed(4)}/s + ${kd.toFixed(4)}s`;
+            
+            resultDiv.textContent = result;
+            resultDiv.classList.remove('hidden');
+        }
+
+        function calculateResponse() {
+            const responseType = document.getElementById('response-type').value;
+            const wn = parseFloat(document.getElementById('natural-frequency').value);
+            const zeta = parseFloat(document.getElementById('damping-ratio').value);
+            const t = parseFloat(document.getElementById('time-value').value);
+            const resultDiv = document.getElementById('response-result');
+            
+            if (!wn || !zeta || !t) {
+                resultDiv.textContent = 'Please enter all system parameters';
+                resultDiv.classList.remove('hidden');
+                return;
+            }
+            
+            let response;
+            
+            if (zeta < 1) {
+                // Underdamped
+                const wd = wn * Math.sqrt(1 - zeta*zeta);
+                const phi = Math.atan(zeta / Math.sqrt(1 - zeta*zeta));
+                
+                if (responseType === 'step') {
+                    response = 1 - (Math.exp(-zeta*wn*t) / Math.sqrt(1 - zeta*zeta)) * Math.sin(wd*t + phi);
+                } else if (responseType === 'impulse') {
+                    response = (wn / Math.sqrt(1 - zeta*zeta)) * Math.exp(-zeta*wn*t) * Math.sin(wd*t);
+                } else {
+                    response = t - (2*zeta/wn) + (Math.exp(-zeta*wn*t) / (wn * Math.sqrt(1 - zeta*zeta))) * Math.sin(wd*t + 2*phi);
+                }
+            } else {
+                response = 'System is not underdamped (ζ ≥ 1)';
+            }
+            
+            const result = `${responseType.charAt(0).toUpperCase() + responseType.slice(1)} Response:
+            
+System Parameters:
+ωₙ = ${wn} rad/s, ζ = ${zeta}, t = ${t} s
+
+Response: ${typeof response === 'number' ? response.toFixed(6) : response}`;
+            
+            resultDiv.textContent = result;
+            resultDiv.classList.remove('hidden');
+        }
+
+        // Resource Download Function
+        function downloadResource(resourceType) {
+            // In a real implementation, this would generate and download actual files
+            // For demo purposes, we'll show a success message
+            const resourceNames = {
+                'laplace-table': 'Laplace Transform Table',
+                'transfer-functions': 'Transfer Function Formulas',
+                'pid-formulas': 'PID Controller Design',
+                'frequency-response': 'Frequency Response Analysis',
+                'rlc-circuits': 'RLC Circuit Analysis',
+                'stability-criteria': 'Stability Criteria',
+                'matlab-basics': 'MATLAB Control Systems Basics',
+                'matlab-plots': 'MATLAB Plotting Examples',
+                'matlab-pid': 'MATLAB PID Controller Design',
+                'matlab-frequency': 'MATLAB Frequency Response',
+                'matlab-state-space': 'MATLAB State-Space Analysis',
+                'matlab-simulations': 'MATLAB Advanced Simulations',
+                'problems-beginner': 'Beginner Practice Problems',
+                'problems-intermediate': 'Intermediate Practice Problems',
+                'problems-advanced': 'Advanced Practice Problems'
+            };
+            
+            const resourceName = resourceNames[resourceType] || 'Resource';
+            
+            // Show download notification
+            const notification = document.createElement('div');
+            notification.className = 'fixed top-20 right-4 bg-green-600 text-white px-6 py-3 rounded-lg shadow-lg z-50';
+            notification.innerHTML = `
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-check-circle"></i>
+                    <span>${resourceName} download started!</span>
+                </div>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
+
+        // Scroll reveal animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('revealed');
+                }
+            });
+        }, observerOptions);
+        
+        document.querySelectorAll('.scroll-reveal').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+
+    <!-- Google Generative AI -->
+    <script type="importmap">
+    {
+        "imports": {
+            "@google/generative-ai": "https://esm.run/@google/generative-ai"
+        }
+    }
+    </script>
+    <script type="module">
+        import { GoogleGenerativeAI } from "@google/generative-ai";
+        window.GoogleGenerativeAI = GoogleGenerativeAI;
+    </script>
+
+    <!-- Floating Chatbot Widget -->
+    <div id="chat-widget" class="fixed bottom-6 right-6 z-40">
+        <!-- Chat Button -->
+        <button id="chat-widget-btn" class="w-16 h-16 bg-gradient-to-br from-blue-500 to-cyan-400 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center text-white hover:scale-110">
+            <i class="fas fa-robot text-2xl"></i>
+        </button>
+
+        <!-- Chat Window -->
+        <div id="chat-widget-window" class="hidden absolute bottom-20 right-0 w-80 h-96 bg-white rounded-xl shadow-2xl border border-gray-200 flex flex-col">
+            <!-- Chat Header -->
+            <div class="bg-gradient-to-r from-blue-500 to-cyan-400 text-white p-4 rounded-t-xl">
+                <div class="flex items-center space-x-3">
+                    <div class="w-8 h-8 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
+                        <i class="fas fa-robot text-sm"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold">AI Assistant</h3>
+                        <p class="text-xs text-blue-100">Ask me anything about control systems</p>
+                    </div>
+                </div>
+                <button id="chat-widget-close" class="absolute top-3 right-3 text-white hover:text-gray-200">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <!-- Chat Messages -->
+            <div id="chat-widget-messages" class="flex-1 p-4 overflow-y-auto space-y-3">
+                <div class="flex items-start space-x-2">
+                    <div class="w-6 h-6 bg-gradient-to-br from-blue-500 to-cyan-400 rounded-full flex items-center justify-center text-white text-xs">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="bg-gray-100 rounded-lg p-3 max-w-xs">
+                        <p class="text-sm text-gray-800">Hi! I'm your AI assistant for control systems. Ask me anything!</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chat Input -->
+            <div class="p-4 border-t border-gray-200">
+                <div class="flex space-x-2">
+                    <input
+                        type="text"
+                        id="chat-widget-input"
+                        placeholder="Type your question..."
+                        class="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    >
+                    <button id="chat-widget-send" class="w-10 h-10 bg-gradient-to-br from-blue-500 to-cyan-400 rounded-lg text-white hover:scale-105 transition-transform">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chat Widget JavaScript -->
+    <script>
+        // Chat Widget Functionality
+        const chatWidgetBtn = document.getElementById('chat-widget-btn');
+        const chatWidgetWindow = document.getElementById('chat-widget-window');
+        const chatWidgetClose = document.getElementById('chat-widget-close');
+        const chatWidgetMessages = document.getElementById('chat-widget-messages');
+        const chatWidgetInput = document.getElementById('chat-widget-input');
+        const chatWidgetSend = document.getElementById('chat-widget-send');
+
+        // Initialize Gemini AI
+        const GEMINI_API_KEY = 'YOUR_GEMINI_API_KEY_HERE';
+        let genAI = null;
+        let model = null;
+
+        // Initialize AI asynchronously - wait for library to load
+        async function initializeChatAI() {
+            // Wait for GoogleGenerativeAI to be available
+            let attempts = 0;
+            while (typeof GoogleGenerativeAI === 'undefined' && attempts < 50) {
+                await new Promise(resolve => setTimeout(resolve, 100));
+                attempts++;
+            }
+
+            if (typeof GoogleGenerativeAI !== 'undefined') {
+                genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
+                model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
+                console.log('✅ Chat Widget AI initialized with gemini-2.0-flash');
+            } else {
+                console.error('❌ Failed to load GoogleGenerativeAI library');
+            }
+        }
+
+        // Start initialization
+        initializeChatAI();
+
+        // Toggle chat window
+        chatWidgetBtn.addEventListener('click', () => {
+            chatWidgetWindow.classList.toggle('hidden');
+            if (!chatWidgetWindow.classList.contains('hidden')) {
+                chatWidgetInput.focus();
+            }
+        });
+
+        // Close chat window
+        chatWidgetClose.addEventListener('click', () => {
+            chatWidgetWindow.classList.add('hidden');
+        });
+
+        // Send message function
+        async function sendWidgetMessage() {
+            const message = chatWidgetInput.value.trim();
+            if (!message) return;
+
+            // Add user message
+            addWidgetMessage(message, 'user');
+            chatWidgetInput.value = '';
+
+            // Disable input while processing
+            chatWidgetInput.disabled = true;
+            chatWidgetSend.disabled = true;
+
+            try {
+                // Call Gemini AI
+                if (model) {
+                    const enhancedPrompt = `You are a Control Systems tutor. Answer in 1-2 short paragraphs ONLY.
+
+Question: ${message}
+
+Be brief and direct.`;
+
+                    const result = await model.generateContent(enhancedPrompt);
+                    const response = result.response.text();
+                    addWidgetMessage(response, 'assistant');
+                } else {
+                    addWidgetMessage("AI assistant is not available. Please refresh the page.", 'assistant');
+                }
+            } catch (error) {
+                console.error('Widget AI Error:', error);
+                addWidgetMessage("Sorry, I encountered an error. Please try again.", 'assistant');
+            } finally {
+                // Re-enable input
+                chatWidgetInput.disabled = false;
+                chatWidgetSend.disabled = false;
+                chatWidgetInput.focus();
+            }
+        }
+
+        // Add message to widget chat
+        function addWidgetMessage(content, sender) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `flex items-start space-x-2 ${sender === 'user' ? 'justify-end' : ''}`;
+
+            if (sender === 'assistant') {
+                messageDiv.innerHTML = `
+                    <div class="w-6 h-6 bg-gradient-to-br from-blue-500 to-cyan-400 rounded-full flex items-center justify-center text-white text-xs">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="bg-gray-100 rounded-lg p-3 max-w-xs">
+                        <p class="text-sm text-gray-800">${content}</p>
+                    </div>
+                `;
+            } else {
+                messageDiv.innerHTML = `
+                    <div class="bg-blue-500 text-white rounded-lg p-3 max-w-xs">
+                        <p class="text-sm">${content}</p>
+                    </div>
+                    <div class="w-6 h-6 bg-gray-400 rounded-full flex items-center justify-center text-white text-xs">
+                        <i class="fas fa-user"></i>
+                    </div>
+                `;
+            }
+
+            chatWidgetMessages.appendChild(messageDiv);
+            chatWidgetMessages.scrollTop = chatWidgetMessages.scrollHeight;
+        }
+
+        // Send message on button click
+        chatWidgetSend.addEventListener('click', sendWidgetMessage);
+
+        // Send message on Enter key
+        chatWidgetInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                sendWidgetMessage();
+            }
+        });
+
+        // Auto-open widget after 3 seconds
+        setTimeout(() => {
+            chatWidgetBtn.style.animation = 'bounce 0.5s ease-in-out';
+            setTimeout(() => {
+                chatWidgetBtn.style.animation = '';
+            }, 500);
+        }, 3000);
+    </script>
+
+</body>
+</html>

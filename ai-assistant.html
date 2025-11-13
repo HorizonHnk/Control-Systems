@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Assistant - Control Systems Mastery</title>
+    <meta name="description" content="Get instant help with Control Systems Engineering. AI-powered assistant can analyze circuit diagrams, solve equations, and explain complex concepts 24/7.">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Generative AI -->
+    <script type="importmap">
+    {
+        "imports": {
+            "@google/generative-ai": "https://esm.run/@google/generative-ai"
+        }
+    }
+    </script>
+    <script type="module">
+        import { GoogleGenerativeAI } from "@google/generative-ai";
+        window.GoogleGenerativeAI = GoogleGenerativeAI;
+    </script>
+
+    <!-- KaTeX for Math Rendering -->
+    <link href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+    
+    <!-- Custom Styles -->
+    <style>
+        :root {
+            --primary-blue: #1E3A8A;
+            --electric-blue: #3B82F6;
+            --cyan-accent: #06B6D4;
+            --light-bg: #F8FAFC;
+            --dark-text: #1E293B;
+            --gray-text: #64748B;
+            --success-green: #10B981;
+            --warning-orange: #F59E0B;
+            --card-bg: #FFFFFF;
+            --border-color: #E2E8F0;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--light-bg);
+            color: var(--dark-text);
+            overflow-x: hidden;
+        }
+        
+        .text-gradient {
+            background: linear-gradient(135deg, var(--electric-blue), var(--cyan-accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(59, 130, 246, 0.1);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        
+        .chat-container {
+            height: calc(100vh - 200px);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            overflow-x: hidden;
+            padding: 1rem;
+            background: #FFFFFF;
+        }
+        
+        .chat-input-container {
+            padding: 1rem;
+            border-top: 1px solid var(--border-color);
+        }
+        
+        .message {
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+        }
+        
+        .message.user {
+            flex-direction: row-reverse;
+        }
+        
+        .message-avatar {
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        
+        .message.user .message-avatar {
+            background: linear-gradient(135deg, var(--electric-blue), var(--cyan-accent));
+        }
+        
+        .message.assistant .message-avatar {
+            background: linear-gradient(135deg, #8B5CF6, #EC4899);
+        }
+        
+        .message-content {
+            max-width: 80%;
+            padding: 1rem;
+            border-radius: 1rem;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            word-break: break-word;
+            white-space: pre-wrap;
+            overflow: visible;
+            line-height: 1.6;
+        }
+        
+        .message.user .message-content {
+            background: linear-gradient(135deg, var(--electric-blue), var(--cyan-accent));
+            color: white;
+        }
+        
+        .message.assistant .message-content {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            color: var(--dark-text);
+        }
+        
+        .typing-indicator {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem;
+            color: var(--gray-text);
+        }
+        
+        .typing-dots {
+            display: flex;
+            gap: 0.25rem;
+        }
+        
+        .typing-dot {
+            width: 0.5rem;
+            height: 0.5rem;
+            background: var(--gray-text);
+            border-radius: 50%;
+            animation: typing 1.4s infinite ease-in-out;
+        }
+        
+        .typing-dot:nth-child(1) { animation-delay: -0.32s; }
+        .typing-dot:nth-child(2) { animation-delay: -0.16s; }
+        
+        @keyframes typing {
+            0%, 80%, 100% { transform: scale(0); opacity: 0.5; }
+            40% { transform: scale(1); opacity: 1; }
+        }
+        
+        .input-area {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 1rem;
+            padding: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .input-area:focus-within {
+            border-color: var(--electric-blue);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+        
+        .text-input {
+            background: transparent;
+            border: none;
+            outline: none;
+            color: var(--dark-text);
+            width: 100%;
+            resize: none;
+            font-family: 'Inter', sans-serif;
+            min-height: 3rem;
+            max-height: 8rem;
+        }
+        
+        .text-input::placeholder {
+            color: var(--gray-text);
+        }
+        
+        .send-button {
+            background: linear-gradient(135deg, var(--electric-blue), var(--cyan-accent));
+            border: none;
+            color: white;
+            padding: 0.75rem;
+            border-radius: 0.75rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .send-button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 10px 25px rgba(59, 130, 246, 0.3);
+        }
+        
+        .send-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .file-upload {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .file-upload input[type="file"] {
+            position: absolute;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+        
+        .file-upload-label {
+            background: rgba(139, 92, 246, 0.1);
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            color: #8B5CF6;
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .file-upload-label:hover {
+            background: rgba(139, 92, 246, 0.2);
+            border-color: #8B5CF6;
+        }
+        
+        .nav-link {
+            position: relative;
+            transition: all 0.3s ease;
+            color: var(--dark-text);
+        }
+        
+        .nav-link:hover {
+            color: var(--electric-blue);
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--electric-blue);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .mobile-menu {
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+        }
+        
+        .mobile-menu.active {
+            transform: translateX(0);
+        }
+        
+        .quick-prompt {
+            background: rgba(59, 130, 246, 0.05);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            border-radius: 0.75rem;
+            padding: 0.75rem 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.875rem;
+            color: var(--dark-text);
+        }
+        
+        .quick-prompt:hover {
+            background: rgba(59, 130, 246, 0.1);
+            border-color: var(--electric-blue);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(59, 130, 246, 0.1);
+        }
+        
+        .code-block {
+            background: rgba(0, 0, 0, 0.02);
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin: 1rem 0;
+            border: 1px solid var(--border-color);
+            font-family: 'JetBrains Mono', monospace;
+        }
+        
+        .math-formula {
+            background: rgba(139, 92, 246, 0.05);
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin: 1rem 0;
+            text-align: center;
+        }
+        
+        .image-preview {
+            max-width: 200px;
+            max-height: 200px;
+            border-radius: 0.5rem;
+            margin: 0.5rem 0;
+            border: 1px solid var(--border-color);
+        }
+
+        /* Welcome message specific styling */
+        .welcome-message .message-content {
+            max-width: 95%;
+        }
+
+        /* Ultra-small screens (320px and below) */
+        @media (max-width: 320px) {
+            .welcome-message .message-content {
+                max-width: 100%;
+                padding: 0.75rem;
+                font-size: 0.875rem;
+            }
+
+            .welcome-message .message-avatar {
+                width: 2rem;
+                height: 2rem;
+            }
+            .chat-container {
+                height: calc(100vh - 150px);
+            }
+            
+            .message-content {
+                max-width: 90%;
+            }
+            
+            .quick-prompt {
+                padding: 0.5rem 0.75rem;
+                font-size: 0.75rem;
+            }
+        }
+        
+        /* Small screens (321px - 640px) */
+        @media (min-width: 321px) and (max-width: 640px) {
+            .chat-container {
+                height: calc(100vh - 150px);
+            }
+
+            .message-content {
+                max-width: 90%;
+            }
+
+            .welcome-message .message-content {
+                max-width: 95%;
+                padding: 0.875rem;
+            }
+        }
+        
+        /* Medium screens (641px - 1024px) */
+        @media (min-width: 641px) and (max-width: 1024px) {
+            .chat-container {
+                height: calc(100vh - 180px);
+            }
+        }
+        
+        /* Large screens (1025px - 1920px) */
+        @media (min-width: 1025px) and (max-width: 1920px) {
+            .chat-container {
+                height: calc(100vh - 200px);
+            }
+        }
+        
+        /* Extra large screens (1921px and above) */
+        @media (min-width: 1921px) {
+            .chat-container {
+                height: calc(100vh - 220px);
+            }
+            
+            .max-w-7xl {
+                max-width: 1400px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-white shadow-sm border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <a href="index.html" class="flex items-center space-x-3 hover:opacity-80 transition-opacity">
+                    <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-cyan-400 rounded-lg flex items-center justify-center">
+                        <i class="fas fa-microchip text-white text-lg"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-xl font-bold text-gradient">Control Systems</h1>
+                        <p class="text-xs text-gray-500">Mastery</p>
+                    </div>
+                </a>
+                
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="nav-link font-medium">Home</a>
+                    <a href="videos.html" class="nav-link font-medium">Videos</a>
+                    <a href="ai-assistant.html" class="nav-link text-blue-600 font-medium">AI Assistant</a>
+                    <a href="resources.html" class="nav-link font-medium">Resources</a>
+                    <a href="about.html" class="nav-link font-medium">About</a>
+                    <a href="contact.html" class="nav-link font-medium">Contact</a>
+                </div>
+                
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="md:hidden text-gray-700">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="mobile-menu md:hidden fixed top-16 right-0 w-64 h-screen shadow-lg">
+            <div class="p-6 space-y-4">
+                <a href="index.html" class="block font-medium py-2 text-gray-700 hover:text-blue-600">Home</a>
+                <a href="videos.html" class="block font-medium py-2 text-gray-700 hover:text-blue-600">Videos</a>
+                <a href="ai-assistant.html" class="block font-medium py-2 text-blue-600">AI Assistant</a>
+                <a href="resources.html" class="block font-medium py-2 text-gray-700 hover:text-blue-600">Resources</a>
+                <a href="about.html" class="block font-medium py-2 text-gray-700 hover:text-blue-600">About</a>
+                <a href="contact.html" class="block font-medium py-2 text-gray-700 hover:text-blue-600">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header Section -->
+    <section class="pt-24 pb-8 bg-gradient-to-br from-purple-50 via-blue-50 to-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-8">
+                <h1 class="text-4xl md:text-6xl font-black mb-6 text-gray-900">
+                    AI <span class="text-gradient">Assistant</span>
+                </h1>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Get instant help with Control Systems Engineering. Our AI assistant can analyze circuit diagrams, 
+                    solve equations, and explain complex concepts 24/7.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Prompts -->
+    <section class="py-8 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-6">
+                <h2 class="text-2xl font-bold text-gray-900 mb-4">Quick Questions</h2>
+                <p class="text-gray-600">Click on any prompt to start a conversation</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div class="quick-prompt" onclick="sendQuickPrompt('What is a transfer function in control systems?')">
+                    <div class="font-semibold text-gray-900 mb-1">Transfer Functions</div>
+                    <div class="text-sm text-gray-600">What is a transfer function in control systems?</div>
+                </div>
+                
+                <div class="quick-prompt" onclick="sendQuickPrompt('Explain Laplace transforms and their applications')">
+                    <div class="font-semibold text-gray-900 mb-1">Laplace Transforms</div>
+                    <div class="text-sm text-gray-600">Explain Laplace transforms and their applications</div>
+                </div>
+                
+                <div class="quick-prompt" onclick="sendQuickPrompt('How do PID controllers work?')">
+                    <div class="font-semibold text-gray-900 mb-1">PID Controllers</div>
+                    <div class="text-sm text-gray-600">How do PID controllers work?</div>
+                </div>
+                
+                <div class="quick-prompt" onclick="sendQuickPrompt('What is system stability and how to analyze it?')">
+                    <div class="font-semibold text-gray-900 mb-1">Stability Analysis</div>
+                    <div class="text-sm text-gray-600">What is system stability and how to analyze it?</div>
+                </div>
+                
+                <div class="quick-prompt" onclick="sendQuickPrompt('Explain damping ratio and natural frequency')">
+                    <div class="font-semibold text-gray-900 mb-1">System Response</div>
+                    <div class="text-sm text-gray-600">Explain damping ratio and natural frequency</div>
+                </div>
+                
+                <div class="quick-prompt" onclick="sendQuickPrompt('How to analyze RLC circuits as control systems?')">
+                    <div class="font-semibold text-gray-900 mb-1">RLC Circuits</div>
+                    <div class="text-sm text-gray-600">How to analyze RLC circuits as control systems?</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Chat Interface -->
+    <section class="py-8 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="glass-effect rounded-2xl overflow-hidden">
+                <div class="chat-container">
+                    <!-- Messages -->
+                    <div id="chat-messages" class="chat-messages">
+                        <!-- Welcome message -->
+                        <div class="message assistant welcome-message">
+                            <div class="message-avatar">
+                                <i class="fas fa-robot text-white"></i>
+                            </div>
+                            <div class="message-content">
+                                <p class="text-sm text-gray-900"><strong>Control Systems AI Assistant</strong> - Hello! I'm your AI assistant for Control Systems Engineering. 💡 Ask questions, upload circuit diagrams, or solve equations!</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Typing Indicator -->
+                    <div id="typing-indicator" class="typing-indicator hidden">
+                        <div class="message-avatar">
+                            <i class="fas fa-robot text-white text-sm"></i>
+                        </div>
+                        <div class="typing-dots">
+                            <div class="typing-dot"></div>
+                            <div class="typing-dot"></div>
+                            <div class="typing-dot"></div>
+                        </div>
+                        <span class="ml-2">AI is thinking...</span>
+                    </div>
+                    
+                    <!-- Input Area -->
+                    <div class="chat-input-container">
+                        <div class="input-area">
+                            <div class="flex items-center gap-3">
+                                <!-- File Upload -->
+                                <div class="file-upload">
+                                    <input type="file" id="image-upload" accept="image/*" />
+                                    <label for="image-upload" class="file-upload-label">
+                                        <i class="fas fa-image"></i>
+                                    </label>
+                                </div>
+
+                                <!-- Text Input -->
+                                <textarea
+                                    id="message-input"
+                                    class="text-input"
+                                    placeholder="Ask me anything about control systems..."
+                                    rows="1"
+                                ></textarea>
+
+                                <!-- Send Button -->
+                                <button id="send-button" class="send-button">
+                                    <i class="fas fa-paper-plane"></i>
+                                </button>
+                            </div>
+                            
+                            <!-- Image Preview -->
+                            <div id="image-preview" class="hidden mt-3">
+                                <img id="preview-image" class="image-preview" alt="Preview" />
+                                <button id="remove-image" class="ml-2 text-red-500 hover:text-red-700">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-100 py-12 border-t border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="col-span-1 md:col-span-2">
+                    <div class="flex items-center space-x-3 mb-6">
+                        <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-cyan-400 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-microchip text-white text-lg"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-gradient">Control Systems Mastery</h3>
+                            <p class="text-sm text-gray-700">Engineering Made Simple</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 mb-6 leading-relaxed">
+                        Empowering engineering students worldwide with free, comprehensive control systems education through expert video tutorials and AI-powered assistance.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="https://www.youtube.com/@HNK2005" target="_blank" class="text-gray-700 hover:text-blue-600 transition-colors">
+                            <i class="fab fa-youtube text-xl"></i>
+                        </a>
+                        <a href="https://discord.gg/hnk0422_76455" target="_blank" class="text-gray-700 hover:text-blue-600 transition-colors">
+                            <i class="fab fa-discord text-xl"></i>
+                        </a>
+                        <a href="https://twitter.com/HnkHorizon" target="_blank" class="text-gray-700 hover:text-blue-600 transition-colors">
+                            <i class="fab fa-twitter text-xl"></i>
+                        </a>
+                        <a href="https://tiktok.com/@codingfever" target="_blank" class="text-gray-700 hover:text-blue-600 transition-colors">
+                            <i class="fab fa-tiktok text-xl"></i>
+                        </a>
+                        <a href="https://instagram.com/hhnk.3693" target="_blank" class="text-gray-700 hover:text-blue-600 transition-colors">
+                            <i class="fab fa-instagram text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold text-gray-900 mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="videos.html" class="text-gray-700 hover:text-blue-600 transition-colors">Video Library</a></li>
+                        <li><a href="ai-assistant.html" class="text-gray-700 hover:text-blue-600 transition-colors">AI Assistant</a></li>
+                        <li><a href="resources.html" class="text-gray-700 hover:text-blue-600 transition-colors">Resources</a></li>
+                        <li><a href="about.html" class="text-gray-700 hover:text-blue-600 transition-colors">About</a></li>
+                        <li><a href="contact.html" class="text-gray-700 hover:text-blue-600 transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-lg font-semibold text-gray-900 mb-4">Topics</h4>
+                    <ul class="space-y-2">
+                        <li><a href="videos.html?topic=laplace" class="text-gray-700 hover:text-blue-600 transition-colors">Laplace Transforms</a></li>
+                        <li><a href="videos.html?topic=transfer" class="text-gray-700 hover:text-blue-600 transition-colors">Transfer Functions</a></li>
+                        <li><a href="videos.html?topic=pid" class="text-gray-700 hover:text-blue-600 transition-colors">PID Controllers</a></li>
+                        <li><a href="videos.html?topic=stability" class="text-gray-700 hover:text-blue-600 transition-colors">Stability Analysis</a></li>
+                        <li><a href="videos.html?topic=circuits" class="text-gray-700 hover:text-blue-600 transition-colors">RLC Circuits</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-200 mt-12 pt-8 text-center">
+                <p class="text-gray-700">
+                    © 2025 Control Systems Mastery. Built with ❤️ for engineering education.
+                    <a href="https://github.com/HorizonHnk/Control-Systems" target="_blank" class="text-cyan-400 hover:text-cyan-600 transition-colors">
+                        View on GitHub
+                    </a>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Gemini AI Configuration
+        const API_KEY = 'YOUR_GEMINI_API_KEY_HERE';
+        let genAI = null;
+        let model = null;
+        let visionModel = null;
+        
+        // Initialize Gemini AI
+        async function initializeAI() {
+            try {
+                // Wait for GoogleGenerativeAI to be available
+                if (typeof GoogleGenerativeAI === 'undefined') {
+                    console.warn('⏳ Waiting for GoogleGenerativeAI to load...');
+                    await new Promise(resolve => {
+                        const checkInterval = setInterval(() => {
+                            if (typeof GoogleGenerativeAI !== 'undefined') {
+                                clearInterval(checkInterval);
+                                resolve();
+                            }
+                        }, 100);
+                    });
+                }
+
+                genAI = new GoogleGenerativeAI(API_KEY);
+
+                // Text model - using gemini-2.0-flash (stable version)
+                model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
+
+                // Vision model - using gemini-2.0-flash (stable version)
+                visionModel = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
+
+                console.log('✅ Gemini AI initialized successfully with gemini-2.0-flash model');
+            } catch (error) {
+                console.error('❌ Failed to initialize Gemini AI:', error);
+                showError('Failed to initialize AI assistant. Please refresh the page.');
+            }
+        }
+
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+        });
+        
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!mobileMenu.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+                mobileMenu.classList.remove('active');
+            }
+        });
+
+        // Chat functionality
+        const chatMessages = document.getElementById('chat-messages');
+        const messageInput = document.getElementById('message-input');
+        const sendButton = document.getElementById('send-button');
+        const typingIndicator = document.getElementById('typing-indicator');
+        const imageUpload = document.getElementById('image-upload');
+        const imagePreview = document.getElementById('image-preview');
+        const previewImage = document.getElementById('preview-image');
+        const removeImage = document.getElementById('remove-image');
+
+        let currentImageFile = null;
+
+        // Auto-resize textarea
+        messageInput.addEventListener('input', () => {
+            messageInput.style.height = 'auto';
+            messageInput.style.height = Math.min(messageInput.scrollHeight, 200) + 'px';
+        });
+
+        // Image upload handling
+        imageUpload.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file && file.type.startsWith('image/')) {
+                currentImageFile = file;
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    previewImage.src = e.target.result;
+                    imagePreview.classList.remove('hidden');
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        removeImage.addEventListener('click', () => {
+            currentImageFile = null;
+            imagePreview.classList.add('hidden');
+            imageUpload.value = '';
+        });
+
+        // Send message functionality
+        async function sendMessage() {
+            const message = messageInput.value.trim();
+            if (!message && !currentImageFile) return;
+
+            // Add user message to chat
+            addMessage(message, 'user');
+            
+            // Clear input
+            messageInput.value = '';
+            messageInput.style.height = 'auto';
+            
+            // Hide image preview
+            if (currentImageFile) {
+                imagePreview.classList.add('hidden');
+            }
+
+            // Show typing indicator
+            showTypingIndicator();
+
+            try {
+                let response;
+                
+                if (currentImageFile) {
+                    // Handle image + text input
+                    response = await sendImageMessage(message, currentImageFile);
+                } else {
+                    // Handle text-only input
+                    response = await sendTextMessage(message);
+                }
+                
+                // Hide typing indicator and add AI response
+                hideTypingIndicator();
+                addMessage(response, 'assistant');
+                
+            } catch (error) {
+                console.error('Error sending message:', error);
+                hideTypingIndicator();
+                addMessage('I apologize, but I encountered an error while processing your request. Please try again.', 'assistant');
+            }
+
+            // Clear image file
+            currentImageFile = null;
+            imageUpload.value = '';
+        }
+
+        // Send text message to Gemini AI
+        async function sendTextMessage(message) {
+            if (!model) {
+                throw new Error('AI model not initialized');
+            }
+
+            const chat = model.startChat({
+                history: [],
+                generationConfig: {
+                    maxOutputTokens: 2048,
+                    temperature: 0.7,
+                    topP: 0.8,
+                    topK: 40,
+                },
+                safetySettings: [
+                    { category: 'HARM_CATEGORY_HARASSMENT', threshold: 'BLOCK_MEDIUM_AND_ABOVE' },
+                    { category: 'HARM_CATEGORY_HATE_SPEECH', threshold: 'BLOCK_MEDIUM_AND_ABOVE' },
+                    { category: 'HARM_CATEGORY_SEXUALLY_EXPLICIT', threshold: 'BLOCK_MEDIUM_AND_ABOVE' },
+                    { category: 'HARM_CATEGORY_DANGEROUS_CONTENT', threshold: 'BLOCK_MEDIUM_AND_ABOVE' },
+                ]
+            });
+
+            const enhancedPrompt = `You are a helpful Control Systems tutor. Give VERY SHORT answers.
+
+STRICT RULES:
+- Maximum 2-3 short paragraphs ONLY
+- Use bullet points (max 4-5 items)
+- Be extremely concise
+- NO long explanations
+- Get straight to the point
+
+Question: ${message}
+
+Give a brief, direct answer.`;
+
+            const result = await chat.sendMessage(enhancedPrompt);
+            return result.response.text();
+        }
+
+        // Send image message to Gemini AI
+        async function sendImageMessage(message, imageFile) {
+            if (!visionModel) {
+                throw new Error('Vision model not initialized');
+            }
+
+            // Convert image to base64
+            const imageData = await fileToGenerativePart(imageFile);
+            
+            const enhancedPrompt = `You are a Control Systems tutor. Analyze images VERY BRIEFLY.
+
+STRICT RULES:
+- Maximum 2-3 short paragraphs
+- Use bullet points (max 4-5 items)
+- Be extremely concise
+
+Question: ${message}
+
+Give a brief analysis.`;
+
+            const result = await visionModel.generateContent([enhancedPrompt, imageData]);
+            return result.response.text();
+        }
+
+        // Convert file to generative AI format
+        function fileToGenerativePart(file) {
+            return new Promise((resolve) => {
+                const reader = new FileReader();
+                reader.onloadend = () => {
+                    resolve({
+                        inlineData: {
+                            data: reader.result.split(',')[1],
+                            mimeType: file.type
+                        }
+                    });
+                };
+                reader.readAsDataURL(file);
+            });
+        }
+
+        // Add message to chat
+        function addMessage(content, sender) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${sender}`;
+            
+            const avatar = document.createElement('div');
+            avatar.className = 'message-avatar';
+            avatar.innerHTML = sender === 'user' ? '<i class="fas fa-user text-white"></i>' : '<i class="fas fa-robot text-white"></i>';
+            
+            const contentDiv = document.createElement('div');
+            contentDiv.className = 'message-content';
+            
+            if (sender === 'assistant') {
+                // Process AI response with formatting
+                contentDiv.innerHTML = formatAIResponse(content);
+            } else {
+                contentDiv.textContent = content;
+            }
+            
+            messageDiv.appendChild(avatar);
+            messageDiv.appendChild(contentDiv);
+            
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+            
+            // Render math if present
+            if (sender === 'assistant') {
+                renderMath(contentDiv);
+            }
+        }
+
+        // Format AI response with better markdown support
+        function formatAIResponse(content) {
+            let formatted = content;
+
+            // Convert headings (### Heading -> <h3>Heading</h3>)
+            formatted = formatted.replace(/^### (.*?)$/gm, '<h3 class="text-lg font-bold mt-4 mb-2 text-blue-600">$1</h3>');
+            formatted = formatted.replace(/^## (.*?)$/gm, '<h2 class="text-xl font-bold mt-4 mb-2 text-blue-700">$1</h2>');
+
+            // Convert bold and italic
+            formatted = formatted.replace(/\*\*(.*?)\*\*/g, '<strong class="font-semibold text-gray-900">$1</strong>');
+            formatted = formatted.replace(/\*(.*?)\*/g, '<em>$1</em>');
+
+            // Convert bullet points (- item or * item)
+            formatted = formatted.replace(/^[\*\-]\s+(.+)$/gm, '<li class="ml-4">$1</li>');
+
+            // Convert numbered lists (1. item, 2. item)
+            formatted = formatted.replace(/^\d+\.\s+(.+)$/gm, '<li class="ml-4">$1</li>');
+
+            // Wrap consecutive <li> tags in <ul> or <ol>
+            formatted = formatted.replace(/(<li class="ml-4">.*?<\/li>\s*)+/gs, function(match) {
+                return '<ul class="list-disc list-inside mb-3 space-y-1">' + match + '</ul>';
+            });
+
+            // Convert paragraphs (double line breaks)
+            formatted = formatted.replace(/\n\n+/g, '</p><p class="mb-3">');
+
+            // Convert single line breaks to <br>
+            formatted = formatted.replace(/\n/g, '<br>');
+
+            // Wrap in paragraph if not already wrapped
+            if (!formatted.startsWith('<')) {
+                formatted = `<p class="mb-3">${formatted}</p>`;
+            }
+
+            return formatted;
+        }
+
+        // Render math using KaTeX (renamed to avoid infinite recursion)
+        function renderMath(element) {
+            // Check if the global KaTeX renderMathInElement function exists
+            if (typeof window.renderMathInElement !== 'undefined') {
+                try {
+                    window.renderMathInElement(element, {
+                        delimiters: [
+                            {left: '$$', right: '$$', display: true},
+                            {left: '$', right: '$', display: false},
+                            {left: '\\(', right: '\\)', display: false},
+                            {left: '\\[', right: '\\]', display: true}
+                        ],
+                        throwOnError: false
+                    });
+                } catch (error) {
+                    console.error('KaTeX rendering error:', error);
+                }
+            }
+        }
+
+        // Show typing indicator
+        function showTypingIndicator() {
+            typingIndicator.classList.remove('hidden');
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        // Hide typing indicator
+        function hideTypingIndicator() {
+            typingIndicator.classList.add('hidden');
+        }
+
+        // Quick prompt functionality
+        function sendQuickPrompt(prompt) {
+            messageInput.value = prompt;
+            sendMessage();
+        }
+
+        // Event listeners
+        sendButton.addEventListener('click', sendMessage);
+        
+        messageInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                sendMessage();
+            }
+        });
+
+        // Initialize AI on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeAI();
+            
+            // Check for context from URL parameters
+            const urlParams = new URLSearchParams(window.location.search);
+            const context = urlParams.get('context');
+            if (context) {
+                messageInput.value = `Can you explain ${context}?`;
+            }
+        });
+
+        // Error handling
+        function showError(message) {
+            addMessage(`⚠️ ${message}`, 'assistant');
+        }
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                // Clear input
+                messageInput.value = '';
+                messageInput.style.height = 'auto';
+            }
+        });
+
+        // Auto-scroll to bottom when new messages arrive
+        const observer = new MutationObserver(() => {
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        });
+
+        observer.observe(chatMessages, { childList: true, subtree: true });
+    </script>
+</body>
+</html>
