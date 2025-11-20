@@ -1,6 +1,6 @@
 # 🎓 Control Systems Mastery - Engineering Made Simple
 
-[![Live Website](https://img.shields.io/badge/🌐_Live-control--systems.netlify.app-00C7B7?style=for-the-badge)](https://control-systems.netlify.app/)
+[![Live Website](https://img.shields.io/badge/🌐_Live-control--systems.netlify.app-00C7B7?style=for-the-badge)](https://learn-control-systems.netlify.app/)
 [![YouTube](https://img.shields.io/badge/YouTube-@HNK2005-FF0000?style=for-the-badge&logo=youtube)](https://www.youtube.com/@HNK2005)
 [![Videos](https://img.shields.io/badge/Videos-62-blue?style=for-the-badge)]()
 [![Built](https://img.shields.io/badge/Built_in-1_Day-success?style=for-the-badge)]()
@@ -39,7 +39,7 @@
 - **Mathematical equation rendering** using KaTeX
 
 ### Live Website
-🔗 **https://control-systems.netlify.app/**
+🔗 **https://learn-control-systems.netlify.app/**
 
 ---
 
@@ -372,7 +372,7 @@ Each video entry in `videos-data.js` contains:
 
 The website is deployed on **Netlify** with continuous deployment from GitHub.
 
-**Live URL:** https://control-systems.netlify.app/
+**Live URL:** https://learn-control-systems.netlify.app/
 
 #### Deploy Your Own Instance
 
